@@ -104,7 +104,7 @@
             height: 3px;
             width: 100%;
             margin: 30px 0;
-            background: linear-gradient(90deg, #00f3ff, #bf00ff, #00ff66, #3b82f6);
+            background: linear-gradient(90deg, #00f3ff, #bf00ff, #00ff66, #ff007f, #e6a23c, #3b82f6);
             background-size: 300% 100%;
             border-radius: 2px;
             box-shadow: 0 0 10px rgba(191, 0, 255, 0.6);
@@ -155,6 +155,8 @@
         .theme-physics { --neon: #00f3ff; --rgb: 0, 243, 255; }
         .theme-chemistry { --neon: #bf00ff; --rgb: 191, 0, 255; }
         .theme-math { --neon: #00ff66; --rgb: 0, 255, 102; }
+        .theme-biology { --neon: #ff007f; --rgb: 255, 0, 127; }
+        .theme-english { --neon: #e6a23c; --rgb: 230, 162, 60; }
         .theme-it { --neon: #3b82f6; --rgb: 59, 130, 246; }
 
         .neon-card {
@@ -235,6 +237,8 @@
                         <option value="physics">Physics</option>
                         <option value="chemistry">Chemistry</option>
                         <option value="math">Mathematics</option>
+                        <option value="biology">Biology</option>
+                        <option value="english">English</option>
                         <option value="it">Information Technology</option>
                     </select>
                 </div>
@@ -268,6 +272,18 @@
                     <h3>Mathematics</h3>
                     <p style="font-size: 0.85rem; color: var(--subtext-color); margin-bottom: 10px;">Calculus, 3D Geometry & Vectors</p>
                     <span class="neon-badge">Green Theme</span>
+                </div>
+
+                <div class="neon-card theme-biology">
+                    <h3>Biology</h3>
+                    <p style="font-size: 0.85rem; color: var(--subtext-color); margin-bottom: 10px;">Genetics, Biotechnology & Ecology</p>
+                    <span class="neon-badge">Magenta Theme</span>
+                </div>
+
+                <div class="neon-card theme-english">
+                    <h3>English Core</h3>
+                    <p style="font-size: 0.85rem; color: var(--subtext-color); margin-bottom: 10px;">Prose Summaries, Poetry & Writing Skills</p>
+                    <span class="neon-badge">Amber Theme</span>
                 </div>
 
                 <div class="neon-card theme-it">
@@ -306,6 +322,16 @@
                             <td><strong>Mathematics</strong></td>
                             <td>50 Sessions</td>
                             <td><span id="completed-math" style="color: #00ff66; font-weight: bold;">0</span> / 50</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Biology</strong></td>
+                            <td>30 Sessions</td>
+                            <td><span id="completed-biology" style="color: #ff007f; font-weight: bold;">0</span> / 30</td>
+                        </tr>
+                        <tr>
+                            <td><strong>English</strong></td>
+                            <td>15 Sessions</td>
+                            <td><span id="completed-english" style="color: #e6a23c; font-weight: bold;">0</span> / 15</td>
                         </tr>
                         <tr>
                             <td><strong>Information Tech</strong></td>
@@ -419,5 +445,5 @@
         }
     </script>
 </body>
-  </html>
-  
+    </html>
+    

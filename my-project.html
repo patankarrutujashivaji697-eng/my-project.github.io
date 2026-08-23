@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 12 Master Prep Portal</title>
+    <style>
+        /* CSS Variables for Dynamic Theme Switching */
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --text-color: #c9d1d9;
+            --heading-color: #f0f6fc;
+            --border-color: #30363d;
+            --nav-bg: #161b22;
+            --subtext-color: #8b949e;
+            --input-bg: #0d1117;
+        }
+
+        /* Light Theme Overrides */
+        body.light-theme {
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-color: #2d3748;
+            --heading-color: #1a202c;
+            --border-color: #e2e8f0;
+            --nav-bg: #1a365d;
+            --subtext-color: #4a5568;
+            --input-bg: #ffffff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+            padding-bottom: 50px;
+        }
+
+        /* Header Navigation */
+        header {
+            background-color: var(--nav-bg);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-glow {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #58a6ff;
+            text-shadow: 0 0 10px rgba(88, 166, 255, 0.5);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #f0f6fc;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        nav a:hover, nav a.active {
+            color: #58a6ff;
+            background: rgba(88, 166, 255, 0.1);
+        }
+
+        .theme-btn {
+            background: #238636;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.85rem;
+            box-shadow: 0 0 8px rgba(35, 134, 54, 0.4);
+        }
+
+        .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
+
+        /* Page View Toggle */
+        .page-view { display: none; }
+        .page-view.active { display: block; }
+
+        /* Animated Glowing Divider */
+        .glow-divider {
+            height: 3px;
+            width: 100%;
+            margin: 30px 0;
+            background: linear-gradient(90deg, #00f3ff, #bf00ff, #00ff66, #3b82f6);
+            background-size: 300% 100%;
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(191, 0, 255, 0.6);
+            animation: glowAnimation 4s ease infinite;
+        }
+
+        @keyframes glowAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Generic Card Styles */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Pomodoro Timer */
+        .pomo-container { text-align: center; }
+        .timer-display {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #ff7b72;
+            text-shadow: 0 0 15px rgba(255, 123, 114, 0.6);
+            margin: 15px 0;
+        }
+
+        .btn-action {
+            background: #238636;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 0 4px;
+        }
+
+        /* Subject Specific Neon Themes */
+        .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+
+        .theme-physics { --neon: #00f3ff; --rgb: 0, 243, 255; }
+        .theme-chemistry { --neon: #bf00ff; --rgb: 191, 0, 255; }
+        .theme-math { --neon: #00ff66; --rgb: 0, 255, 102; }
+        .theme-it { --neon: #3b82f6; --rgb: 59, 130, 246; }
+
+        .neon-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(var(--rgb), 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(var(--rgb), 0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .neon-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--neon);
+            box-shadow: 0 0 20px rgba(var(--rgb), 0.4);
+        }
+
+        .neon-card h3 { color: var(--neon); margin-bottom: 8px; }
+
+        .neon-badge {
+            display: inline-block;
+            background: rgba(var(--rgb), 0.15);
+            color: var(--neon);
+            border: 1px solid rgba(var(--rgb), 0.5);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { text-align: left; padding: 12px; border-bottom: 1px solid var(--border-color); }
+        th { color: var(--subtext-color); font-size: 0.85rem; }
+
+        /* Forms for Contact Page */
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; color: var(--heading-color); }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            border-radius: 6px;
+        }
+
+        footer { text-align: center; color: var(--subtext-color); margin-top: 40px; font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-glow">✨ Class 12 Portal</div>
+        <nav>
+            <ul>
+                <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+                <li><a onclick="showPage('about')" id="nav-about">About Us</a></li>
+                <li><a onclick="showPage('contact')" id="nav-contact">Contact Us</a></li>
+                <li><button class="theme-btn" onclick="toggleTheme()">💡 Toggle Theme</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+
+        <!-- ================= HOME PAGE ================= -->
+        <div id="home" class="page-view active">
+            
+            <!-- Pomodoro Timer -->
+            <div class="card pomo-container">
+                <h2 style="color: var(--heading-color);">⏱️ Pomodoro Target Focus Timer</h2>
+                
+                <div style="margin-top: 15px;">
+                    <label>Studying Subject: </label>
+                    <select id="subjectSelect" style="background: var(--input-bg); color: var(--text-color); padding: 6px; border: 1px solid var(--border-color); border-radius: 4px;">
+                        <option value="physics">Physics</option>
+                        <option value="chemistry">Chemistry</option>
+                        <option value="math">Mathematics</option>
+                        <option value="it">Information Technology</option>
+                    </select>
+                </div>
+
+                <div class="timer-display" id="timerDisplay">25:00</div>
+                
+                <button class="btn-action" onclick="startTimer()">Start</button>
+                <button class="btn-action" style="background: #da3633;" onclick="pauseTimer()">Pause</button>
+                <button class="btn-action" style="background: #6e7681;" onclick="resetTimer()">Reset</button>
+            </div>
+
+            <!-- Glowing Animated Divider -->
+            <div class="glow-divider"></div>
+
+            <!-- Neon Colored Subject Cards -->
+            <h2 style="color: var(--heading-color); margin-bottom: 15px;">📚 Distinct Subject Themes</h2>
+            <div class="grid-cards">
+                <div class="neon-card theme-physics">
+                    <h3>Physics</h3>
+                    <p style="font-size: 0.85rem; color: var(--subtext-color); margin-bottom: 10px;">Electrostatics, Optics & Circuit Analysis</p>
+                    <span class="neon-badge">Cyan Theme</span>
+                </div>
+
+                <div class="neon-card theme-chemistry">
+                    <h3>Chemistry</h3>
+                    <p style="font-size: 0.85rem; color: var(--subtext-color); margin-bottom: 10px;">Organic Mechanisms & Electrochemistry</p>
+                    <span class="neon-badge">Purple Theme</span>
+                </div>
+
+                <div class="neon-card theme-math">
+                    <h3>Mathematics</h3>
+                    <p style="font-size: 0.85rem; color: var(--subtext-color); margin-bottom: 10px;">Calculus, 3D Geometry & Vectors</p>
+                    <span class="neon-badge">Green Theme</span>
+                </div>
+
+                <div class="neon-card theme-it">
+                    <h3>Information Tech</h3>
+                    <p style="font-size: 0.85rem; color: var(--subtext-color); margin-bottom: 10px;">SQL Databases & Web Applications</p>
+                    <span class="neon-badge">Blue Theme</span>
+                </div>
+            </div>
+
+            <!-- Glowing Animated Divider -->
+            <div class="glow-divider"></div>
+
+            <!-- Target Session Tracker -->
+            <div class="card">
+                <h2 style="color: var(--heading-color); margin-bottom: 10px;">📊 Subject Pomodoro Progress</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Target Pomodoros</th>
+                            <th>Completed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Physics</strong></td>
+                            <td>40 Sessions</td>
+                            <td><span id="completed-physics" style="color: #00f3ff; font-weight: bold;">0</span> / 40</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Chemistry</strong></td>
+                            <td>35 Sessions</td>
+                            <td><span id="completed-chemistry" style="color: #bf00ff; font-weight: bold;">0</span> / 35</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mathematics</strong></td>
+                            <td>50 Sessions</td>
+                            <td><span id="completed-math" style="color: #00ff66; font-weight: bold;">0</span> / 50</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Information Tech</strong></td>
+                            <td>20 Sessions</td>
+                            <td><span id="completed-it" style="color: #3b82f6; font-weight: bold;">0</span> / 20</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <!-- ================= ABOUT US PAGE ================= -->
+        <div id="about" class="page-view">
+            <div class="card">
+                <h2 style="color: var(--heading-color); margin-bottom: 10px;">About Class 12 PrepHub</h2>
+                <p>Welcome to Class 12 PrepHub—a study environment engineered specifically for Senior Secondary Board Exam preparation.</p>
+                <br>
+                <p>Our platform combines time-tested learning methods like the <strong>Pomodoro Technique</strong> with visual focus themes to reduce revision fatigue across Science, Mathematics, Language, and Elective streams.</p>
+            </div>
+        </div>
+
+        <!-- ================= CONTACT US PAGE ================= -->
+        <div id="contact" class="page-view">
+            <div class="card">
+                <h2 style="color: var(--heading-color); margin-bottom: 15px;">Contact Support</h2>
+                <form onsubmit="alert('Message Sent!'); return false;">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" placeholder="Your Full Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" placeholder="student@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Message / Study Query</label>
+                        <textarea rows="4" placeholder="How can we help your prep?" required></textarea>
+                    </div>
+                    <button class="btn-action" type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>&copy; 2026 Class 12 Preparation Portal</footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Page Navigation Logic
+        function showPage(pageId) {
+            document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            
+            document.getElementById(pageId).classList.add('active');
+            document.getElementById(`nav-${pageId}`).classList.add('active');
+        }
+
+        // Theme Switcher Logic
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+        }
+
+        // Pomodoro Timer Logic
+        let timer;
+        let timeLeft = 25 * 60;
+        let isRunning = false;
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById("timerDisplay").innerText = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function startTimer() {
+            if (!isRunning) {
+                isRunning = true;
+                timer = setInterval(() => {
+                    if (timeLeft > 0) {
+                        timeLeft--;
+                        updateTimerDisplay();
+                    } else {
+                        clearInterval(timer);
+                        isRunning = false;
+                        incrementSubject();
+                        alert("Session complete! 1 Pomodoro added.");
+                        resetTimer();
+                    }
+                }, 1000);
+            }
+        }
+
+        function pauseTimer() { clearInterval(timer); isRunning = false; }
+        
+        function resetTimer() {
+            clearInterval(timer);
+            isRunning = false;
+            timeLeft = 25 * 60;
+            updateTimerDisplay();
+        }
+
+        function incrementSubject() {
+            const selected = document.getElementById("subjectSelect").value;
+            const targetEl = document.getElementById(`completed-${selected}`);
+            if (targetEl) {
+                let count = parseInt(targetEl.innerText, 10) || 0;
+                targetEl.innerText = count + 1;
+            }
+        }
+    </script>
+</body>
+  </html>
+  
